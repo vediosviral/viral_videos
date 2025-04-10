@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        #timer {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ff416c;
+            text-shadow: 2px 2px 10px rgba(255, 65, 108, 0.5);
+            margin-bottom: 20px;
+        }
+        #redirectButton {
+            display: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        #redirectButton:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>Wait for <span id="timer">10</span> seconds</h1>
+    <button id="redirectButton" onclick="redirect()">Press Here</button>
+
+    <script>
+        let timeLeft = 10;
+        const timerDisplay = document.getElementById("timer");
+        const button = document.getElementById("redirectButton");
+
+        function updateTimer() {
+            timerDisplay.textContent = timeLeft;
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                button.style.display = "block";
+            }
+        }
+
+        function redirect() {
+            const nextPage = window.location.pathname.includes("page2.html") ? "index.html" : "page2.html";
+            window.location.href = nextPage;
+        }
+
+        updateTimer();
+    </script>
+</body>
+</html>
